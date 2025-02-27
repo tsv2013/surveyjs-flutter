@@ -1,24 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:surveyjs_flutter/element_factory.dart';
-import 'package:surveyjs_flutter/panel.dart';
-import 'package:surveyjs_flutter/questions/item_value.dart';
-import 'package:surveyjs_flutter/questions/expression_question.dart';
-import 'package:surveyjs_flutter/questions/checkbox_question.dart';
-import 'package:surveyjs_flutter/questions/radiogroup_question.dart';
-import 'package:surveyjs_flutter/questions/select_question.dart';
-import 'package:surveyjs_flutter/questions/text_question.dart';
-import 'package:surveyjs_flutter/questions/question.dart';
-import 'package:surveyjs_flutter/survey.dart';
-import 'package:surveyjs_flutter/widget_factory.dart';
-import 'package:surveyjs_flutter/widgets/checkbox.dart';
-import 'package:surveyjs_flutter/widgets/expression.dart';
-import 'package:surveyjs_flutter/widgets/panel.dart';
-import 'package:surveyjs_flutter/widgets/radiogroup.dart';
-import 'package:surveyjs_flutter/widgets/question.dart';
-import 'package:surveyjs_flutter/widgets/survey.dart';
-import 'package:surveyjs_flutter/widgets/text.dart';
+import 'package:surveyjs_flutter/surveyjs_flutter.dart';
 
 Future<Map> loadSurveyJson(String fileName) async {
   return jsonDecode(await rootBundle.loadString('assets/$fileName'));
