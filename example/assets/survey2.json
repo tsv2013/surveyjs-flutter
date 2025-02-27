@@ -1,0 +1,46 @@
+{
+    "title": "My Survey",
+    "showTOC": true,
+    "pages": [
+        {
+            "name": "page1",
+            "elements": [
+                {
+                    "type": "expression",
+                    "name": "question1",
+                    "expression": "{question2}",
+                    "title": "Expression question title - get value from question2"
+                },
+                {
+                    "type": "text",
+                    "name": "question2",
+                    "inputType": "date",
+                    "title": "Text question title"
+                },
+                {
+                    "type": "radiogroup",
+                    "name": "question3",
+                    "title": "Question radiogroup title",
+                    "choices": [
+                        {"text": "Choice 1", "value": "item1"},
+                        {"text": "Choice 2", "value": "item2"}
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "page2",
+            "elements": [
+                {
+                    "type": "checkbox",
+                    "name": "question4",
+                    "title": "Question checkbox title",
+                    "choices": [
+                        {"text": "Choice 1", "value": "item1"},
+                        {"text": "Choice 2", "value": "item2"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

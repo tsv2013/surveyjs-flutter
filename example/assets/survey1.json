@@ -1,0 +1,32 @@
+{
+    "title": "My Survey",
+    "elements": [
+        {
+            "type": "text111"
+        },
+        {
+            "type": "text",
+            "name": "question2",
+            "inputType": "date",
+            "title": "Text question title"
+        },
+        {
+            "type": "radiogroup",
+            "name": "question3",
+            "title": "Question radiogroup title",
+            "choices": [
+                {"text": "Choice 1", "value": "item1"},
+                {"text": "Choice 2", "value": "item2"}
+            ]
+        },
+        {
+            "type": "checkbox",
+            "name": "question4",
+            "title": "Question checkbox title",
+            "choices": [
+                {"text": "Choice 1", "value": "item1"},
+                {"text": "Choice 2", "value": "item2"}
+            ]
+        }
+    ]
+}
