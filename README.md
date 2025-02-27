@@ -11,8 +11,9 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# surveyjs_flutter
+
+Flutter SurveyJS Runner library.
 
 ## Features
 
@@ -20,8 +21,41 @@ TODO: List what your package can do. Maybe include images, gifs, or videos.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+This project is a starting point for a Flutter application implementing SurveyJS JSON runner.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
+
+## Roadmap
+ - [x] Survey elements deserialization
+ - [x] Properties reacitvity concept
+ - [x] Basic layout, pages, navigation, TOC
+ - [x] Text question
+ - [x] Rediogroup question
+ - [x] Checkbox question
+ - [x] Expression parser
+ - [x] Expression question
+ - [x] Subscribe expressions to mentioned questions
+ - [x] Implement a package library
+ - [ ] Pub package
+ - [ ] I18n concept
+ - [ ] Actions everywhere - title actions, nav bar and so on
+ - [ ] Themes concept
+ - [ ] Apply theme to question widgets
+ - [ ] Matrix single select question
+ - [ ] Dropdown question (+ tagbox)
+ - [ ] Matrix dropdown question
+ - [ ] Boolean question
+ - [ ] Rating question
+ - [ ] HTML and image questions - decide whwther they are needed
+ 
+ ... and son on
 
 ## Usage
 
@@ -34,6 +68,6 @@ const like = 'sample';
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
