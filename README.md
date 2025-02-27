@@ -43,9 +43,11 @@ samples, guidance on mobile development, and a full API reference.
  - [x] Expression question
  - [x] Subscribe expressions to mentioned questions
  - [x] Implement a package library
+ - [ ] Conditional visibility for questions
  - [ ] Pub package
  - [ ] I18n concept
- - [ ] Actions everywhere - title actions, nav bar and so on
+ - [ ] Action containers
+ - [ ] Navigation actions
  - [ ] Themes concept
  - [ ] Apply theme to question widgets
  - [ ] Matrix single select question
@@ -53,6 +55,8 @@ samples, guidance on mobile development, and a full API reference.
  - [ ] Matrix dropdown question
  - [ ] Boolean question
  - [ ] Rating question
+ - [ ] Title actions
+ - [ ] Conditional visibility for choices
  - [ ] HTML and image questions - decide whwther they are needed
  
  ... and son on
