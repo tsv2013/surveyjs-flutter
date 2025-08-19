@@ -13,6 +13,7 @@ void main() {
   ElementFactory.register('checkbox', CheckboxQuestion.new);
   ElementFactory.register('radiogroup', RadiogroupQuestion.new);
   ElementFactory.register('dropdown', DropdownQuestion.new);
+  ElementFactory.register('comment', CommentQuestion.new);
   ElementFactory.register('question', Question.new);
   ElementFactory.register('text', TextQuestion.new);
   ElementFactory.register('panel', Panel.new);
@@ -22,6 +23,7 @@ void main() {
   WidgetFactory.register('checkbox', CheckboxWidget.new);
   WidgetFactory.register('radiogroup', RadioGroupWidget.new);
   WidgetFactory.register('dropdown', DropdownWidget.new);
+  WidgetFactory.register('comment', CommentWidget.new);
   WidgetFactory.register('text', TextWidget.new);
   WidgetFactory.register('panel', PanelWidget.new);
   WidgetFactory.register('expression', ExpressionWidget.new);

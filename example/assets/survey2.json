@@ -48,6 +48,11 @@
                         {"text": "Choice 3", "value": "item3"},
                         {"text": "Choice 4", "value": "item4"}
                     ]
+                },
+                {
+                    "type": "comment",
+                    "name": "question6",
+                    "title": "Question comment title"
                 }
             ]
         }
