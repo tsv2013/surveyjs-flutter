@@ -39,6 +39,15 @@
                         {"text": "Choice 1", "value": "item1"},
                         {"text": "Choice 2", "value": "item2"}
                     ]
+                },
+                {
+                    "type": "dropdown",
+                    "name": "question5",
+                    "title": "Question dropdown title",
+                    "choices": [
+                        {"text": "Choice 3", "value": "item3"},
+                        {"text": "Choice 4", "value": "item4"}
+                    ]
                 }
             ]
         }
