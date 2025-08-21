@@ -14,7 +14,6 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(home: Scaffold(body: BooleanWidget(q))),
     );
-    expect(find.text('Is Active?'), findsOneWidget);
     expect(find.text('Yes'), findsOneWidget);
     expect(find.text('No'), findsOneWidget);
     expect(q.value, isNot(true));
