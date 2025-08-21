@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import '../questions/html_question.dart';
 import 'question.dart';
 
@@ -10,10 +11,7 @@ class HtmlWidget extends QuestionWidget {
     final HtmlQuestion htmlQuestion = question as HtmlQuestion;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: SelectableText(
-        htmlQuestion.html ?? '',
-        style: Theme.of(context).textTheme.bodyLarge,
-      ),
+      child: Html(data: htmlQuestion.html ?? ''),
     );
   }
 }
