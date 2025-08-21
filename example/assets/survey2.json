@@ -53,6 +53,38 @@
                     "type": "comment",
                     "name": "question6",
                     "title": "Question comment title"
+                },
+                {
+                    "type": "boolean",
+                    "name": "question7",
+                    "labelTrue": "Yes",
+                    "labelFalse": "No",
+                    "title": "Question boolean title"
+                }
+            ]
+        },
+        {
+            "name": "page3",
+            "elements": [
+                {
+                    "type": "rating",
+                    "name": "question8",
+                    "title": "Question rating title",
+                    "rateMin": 1,
+                    "rateMax": 5,
+                    "minRateDescription": "Poor",
+                    "maxRateDescription": "Excellent"
+                },
+                {
+                    "type": "html",
+                    "name": "question8",
+                    "html": "<p>This is a <b>HTML</b> question</p>"
+                },
+                {
+                    "type": "image",
+                    "name": "question9",
+                    "imageLink": "https://example.com/image.png",
+                    "altText": "Example Image"
                 }
             ]
         }

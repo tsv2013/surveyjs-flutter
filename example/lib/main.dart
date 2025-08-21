@@ -14,6 +14,10 @@ void main() {
   ElementFactory.register('radiogroup', RadiogroupQuestion.new);
   ElementFactory.register('dropdown', DropdownQuestion.new);
   ElementFactory.register('comment', CommentQuestion.new);
+  ElementFactory.register('boolean', BooleanQuestion.new);
+  ElementFactory.register('html', HtmlQuestion.new);
+  ElementFactory.register('image', ImageQuestion.new);
+  ElementFactory.register('rating', RatingQuestion.new);
   ElementFactory.register('question', Question.new);
   ElementFactory.register('text', TextQuestion.new);
   ElementFactory.register('panel', Panel.new);
@@ -24,6 +28,10 @@ void main() {
   WidgetFactory.register('radiogroup', RadioGroupWidget.new);
   WidgetFactory.register('dropdown', DropdownWidget.new);
   WidgetFactory.register('comment', CommentWidget.new);
+  WidgetFactory.register('boolean', BooleanWidget.new);
+  WidgetFactory.register('html', HtmlWidget.new);
+  WidgetFactory.register('image', ImageWidget.new);
+  WidgetFactory.register('rating', RatingWidget.new);
   WidgetFactory.register('text', TextWidget.new);
   WidgetFactory.register('panel', PanelWidget.new);
   WidgetFactory.register('expression', ExpressionWidget.new);
