@@ -8,14 +8,20 @@ class CommentWidget extends QuestionWidget {
   @override
   Widget build(BuildContext context) {
     final CommentQuestion commentQuestion = question as CommentQuestion;
-    return TextFormField(
-      initialValue: commentQuestion.value?.toString() ?? '',
-      maxLines: 5,
-      onChanged: (value) => commentQuestion.value = value,
-      decoration: InputDecoration(
-        labelText: commentQuestion.title,
-        border: const OutlineInputBorder(),
-      ),
+    return StreamBuilder(
+      initialData: question.value,
+      stream: question.getChangesStreamController('value').stream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return TextFormField(
+          initialValue: commentQuestion.value?.toString() ?? '',
+          maxLines: 5,
+          onChanged: (value) => commentQuestion.value = value,
+          decoration: InputDecoration(
+            labelText: commentQuestion.title,
+            border: const OutlineInputBorder(),
+          ),
+        );
+      },
     );
   }
 }

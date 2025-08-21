@@ -10,13 +10,13 @@ class RatingWidget extends QuestionWidget {
     final RatingQuestion ratingQuestion = question as RatingQuestion;
     final int min = ratingQuestion.rateMin;
     final int max = ratingQuestion.rateMax;
-    final int? value =
-        ratingQuestion.value is int ? ratingQuestion.value : null;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (ratingQuestion.title != null) Text(ratingQuestion.title!),
-        Row(
+    return StreamBuilder(
+      initialData: question.value,
+      stream: question.getChangesStreamController('value').stream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        final int? value =
+            ratingQuestion.value is int ? ratingQuestion.value : null;
+        return Row(
           children: [
             if (ratingQuestion.minRateDescription != null)
               Padding(
@@ -39,8 +39,8 @@ class RatingWidget extends QuestionWidget {
                 child: Text(ratingQuestion.maxRateDescription!),
               ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

@@ -8,25 +8,30 @@ class BooleanWidget extends QuestionWidget {
   @override
   Widget build(BuildContext context) {
     final BooleanQuestion booleanQuestion = question as BooleanQuestion;
-    return Row(
-      children: [
-        Text(booleanQuestion.title ?? ''),
-        const SizedBox(width: 16),
-        Switch(
-          value: (booleanQuestion.value == true),
-          onChanged: (val) => booleanQuestion.value = val,
-        ),
-        if (booleanQuestion.labelFalse != null)
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text(booleanQuestion.labelFalse!),
-          ),
-        if (booleanQuestion.labelTrue != null)
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text(booleanQuestion.labelTrue!),
-          ),
-      ],
+    return StreamBuilder(
+      initialData: question.value,
+      stream: question.getChangesStreamController('value').stream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Row(
+          children: [
+            if (booleanQuestion.labelFalse != null)
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Text(booleanQuestion.labelFalse!),
+              ),
+            // const SizedBox(width: 16),
+            Switch(
+              value: (booleanQuestion.value == true),
+              onChanged: (val) => booleanQuestion.value = val,
+            ),
+            if (booleanQuestion.labelTrue != null)
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(booleanQuestion.labelTrue!),
+              ),
+          ],
+        );
+      },
     );
   }
 }
