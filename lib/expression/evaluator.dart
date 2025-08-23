@@ -30,7 +30,11 @@ class ExpressionEvaluator {
   ) {
     clearDependencies();
 
-    ast = parser.parse(expression ?? '').value;
+    if (expression == null) {
+      return;
+    }
+
+    ast = parser.parse(expression).value;
     if (contextProvider != null) {
       ast!.getDependencies().forEach((questionName) {
         var question = contextProvider.getQuestionByName(questionName);

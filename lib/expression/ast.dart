@@ -6,10 +6,10 @@ abstract class Expression {
 }
 
 /// A value expression.
-class Value extends Expression {
+class Value<T> extends Expression {
   Value(this.value);
 
-  final num value;
+  final T value;
 
   @override
   dynamic eval(Map<String, dynamic> variables) => value;
@@ -25,9 +25,10 @@ class Variable extends Expression {
   final String name;
 
   @override
-  dynamic eval(Map<String, dynamic> variables) => variables.containsKey(name)
-      ? variables[name]!
-      : throw ArgumentError.value(name, 'Unknown variable');
+  dynamic eval(Map<String, dynamic> variables) =>
+      variables.containsKey(name)
+          ? variables[name]
+          : throw ArgumentError.value(name, 'Unknown variable');
 
   @override
   String toString() => 'Variable{$name}';
@@ -54,7 +55,9 @@ class Application extends Expression {
 
   @override
   dynamic eval(Map<String, dynamic> variables) => Function.apply(
-      function, arguments.map((argument) => argument.eval(variables)).toList());
+    function,
+    arguments.map((argument) => argument.eval(variables)).toList(),
+  );
 
   @override
   List<String> getDependencies() {

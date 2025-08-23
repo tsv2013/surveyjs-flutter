@@ -10,8 +10,8 @@ class Survey extends Panel implements IExpressionContextProvider {
     'parent': 'panel',
     "properties": [
       {"name": 'showTOC', "type": 'bool'},
-      {"name": 'pages', "type": 'panel[]'}
-    ]
+      {"name": 'pages', "type": 'panel[]'},
+    ],
   };
   Survey([dynamic json]) : super(json, Survey.description['type'].toString()) {
     if (pages.isNotEmpty) {
@@ -32,6 +32,8 @@ class Survey extends Panel implements IExpressionContextProvider {
   void initialize() {
     visitAllElements((SurveyElement el) {
       el.contextProvider = this;
+    });
+    visitAllElements((SurveyElement el) {
       el.initialize();
     });
   }
@@ -84,10 +86,10 @@ class Survey extends Panel implements IExpressionContextProvider {
     // var data = getData();
   }
 
-  Map<String, dynamic> getData() {
+  Map<String, dynamic> getData({bool returnEmptyData = false}) {
     var data = <String, dynamic>{};
     for (var element in getAllQuestions()) {
-      if (element.value != null) {
+      if (element.name != null && (returnEmptyData || element.value != null)) {
         data[element.name] = element.value;
       }
     }
@@ -96,7 +98,7 @@ class Survey extends Panel implements IExpressionContextProvider {
 
   @override
   Map<String, dynamic> getVariables() {
-    return getData();
+    return getData(returnEmptyData: true);
   }
 
   void setData(Map<String, dynamic> data) {

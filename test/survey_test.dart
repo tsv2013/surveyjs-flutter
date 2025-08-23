@@ -75,6 +75,27 @@ void main() {
         'question',
       );
     });
+    test('Question visibleIf', () async {
+      var json = {
+        "elements": [
+          {"type": "question", "name": "question1"},
+          {
+            "type": "question",
+            "name": "question2",
+            "visibleIf": "{question1} = true",
+          },
+        ],
+      };
+      var survey = Survey(json);
+      expect(survey.elements.length, 2);
+      expect((survey.elements[0] as Question).isVisible, true);
+      expect((survey.elements[1] as Question).isVisible, false);
+      expect((survey.elements[1] as Question).visibleIf, "{question1} = true");
+      (survey.elements[0] as Question).value = true;
+      await Future.delayed(const Duration(milliseconds: 10));
+      expect((survey.elements[0] as Question).isVisible, true);
+      expect((survey.elements[1] as Question).isVisible, true);
+    });
   });
   group('Survey operation', () {
     test('getData/setData', () {
@@ -134,7 +155,7 @@ void main() {
       var q1 = survey.getQuestionByName('question1');
       expect(q1, isNotNull);
       expect(q1!.contextProvider, survey);
-      expect(survey.getVariables(), {});
+      expect(survey.getVariables(), {"question1": null});
       survey.setData({"question1": "answer1"});
       expect(survey.getVariables(), {"question1": "answer1"});
       expect(q1.contextProvider!.getVariables(), {"question1": "answer1"});

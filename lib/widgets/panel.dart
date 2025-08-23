@@ -10,20 +10,37 @@ class PanelWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: panel.getElements().map<Widget>((SurveyElement element) {
-      return Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
-          child: Column(children: [
-            Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
-                child: Row(children: [
-                  Text(
-                    element.title ?? '',
-                    style: const TextStyle(fontSize: 18),
-                  )
-                ])),
-            WidgetFactory.create(element.renderAs, [element])
-          ]));
-    }).toList());
+      children:
+          panel.getElements().map<Widget>((SurveyElement element) {
+            return StreamBuilder(
+              stream: element.getChangesStreamController('isVisible').stream,
+              initialData: element.get('isVisible'),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (!element.get('isVisible')) {
+                  return SizedBox.shrink();
+                }
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              element.title ?? '',
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ),
+                      WidgetFactory.create(element.renderAs, [element]),
+                    ],
+                  ),
+                );
+              },
+            );
+          }).toList(),
+    );
   }
 }

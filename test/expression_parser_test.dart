@@ -15,6 +15,16 @@ void verify(
   expect(ast.toString(), isNotNull);
 }
 
+void verifyBool(
+  String input,
+  bool result, {
+  Map<String, dynamic> variables = const {},
+}) {
+  final ast = parser.parse(input).value;
+  expect(ast.eval(variables), result);
+  expect(ast.toString(), isNotNull);
+}
+
 void main() {
   test('linter', () {
     expect(linter(parser, excludedTypes: {}), isEmpty);
@@ -97,5 +107,18 @@ void main() {
     expect(ast.getDependencies(), ['q1']);
     ast = parser.parse('{q1} / ({q2} + 1)').value;
     expect(ast.getDependencies(), ['q1', 'q2']);
+  });
+  test('boolean', () {
+    verifyBool('1 = 2', false);
+    verifyBool('2 = 2', true);
+    verifyBool('1 + 1 = 1', false);
+    verifyBool('1 + 1 = 2', true);
+    verifyBool('1 + {q1} = 2', true, variables: {'q1': 1});
+    verifyBool('!(1 + 1 = 2)', false);
+    verifyBool('false', false);
+    verifyBool('true', true);
+    verifyBool('!true', false);
+    verifyBool('{q1} = true', false, variables: {'q1': null});
+    verifyBool('{q1} = true', true, variables: {'q1': true});
   });
 }
