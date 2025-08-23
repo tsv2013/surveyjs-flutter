@@ -1,25 +1,35 @@
 import 'package:flutter/material.dart';
 import '../questions/image_question.dart';
-import 'question.dart';
 
-class ImageWidget extends QuestionWidget {
-  const ImageWidget(ImageQuestion question, {super.key}) : super(question);
+class ImageWidget extends StatelessWidget {
+  final ImageQuestion question;
+  const ImageWidget(this.question, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ImageQuestion imageQuestion = question as ImageQuestion;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child:
-          imageQuestion.imageLink != null && imageQuestion.imageLink!.isNotEmpty
-              ? Image.network(
-                imageQuestion.imageLink!,
-                semanticLabel: imageQuestion.altText,
-                errorBuilder:
-                    (context, error, stackTrace) =>
-                        Text(imageQuestion.altText ?? 'Image not found'),
-              )
-              : Text(imageQuestion.altText ?? ''),
+    return StreamBuilder(
+      initialData: question.imageLink,
+      stream: question.getChangesStreamController('imageLink').stream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Row(
+            children: [
+              question.imageLink != null && question.imageLink!.isNotEmpty
+                  ? Image.network(
+                    question.imageLink!,
+                    semanticLabel: question.altText,
+                    loadingBuilder:
+                        (context, error, stackTrace) =>
+                            Text('Image is loading...'),
+                    errorBuilder:
+                        (context, error, stackTrace) => Text('Image not found'),
+                  )
+                  : Text(question.altText ?? ''),
+            ],
+          ),
+        );
+      },
     );
   }
 }

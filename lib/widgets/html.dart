@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import '../questions/html_question.dart';
-import 'question.dart';
 
-class HtmlWidget extends QuestionWidget {
-  const HtmlWidget(HtmlQuestion question, {super.key}) : super(question);
+class HtmlWidget extends StatelessWidget {
+  final HtmlQuestion question;
+  const HtmlWidget(this.question, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    final HtmlQuestion htmlQuestion = question as HtmlQuestion;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Html(data: htmlQuestion.html ?? ''),
+      child: Html(data: question.html ?? ''),
     );
   }
 }
