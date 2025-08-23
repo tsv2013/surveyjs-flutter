@@ -43,7 +43,7 @@ samples, guidance on mobile development, and a full API reference.
  - [x] Expression question
  - [x] Subscribe expressions to mentioned questions
  - [x] Implement a package library
- - [ ] Conditional visibility for questions
+ - [x] Conditional visibility for questions
  - [ ] Pub package
  - [ ] I18n concept
  - [ ] Action containers
