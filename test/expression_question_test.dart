@@ -29,10 +29,12 @@ void main() {
       var q = ExpressionQuestion({'expression': '1+1'});
       expect(q.type, 'expression');
       expect(q.expression, '1+1');
-      expect(q.ast, isNull);
+      expect(q.evaluator, isNotNull);
+      expect(q.evaluator.ast, isNull);
       expect(q.value, isNull);
       q.initialize();
-      expect(q.ast, isNotNull);
+      expect(q.evaluator, isNotNull);
+      expect(q.evaluator.ast, isNotNull);
       expect(q.value, isNull);
     });
     test('Evaluate simple expression', () {

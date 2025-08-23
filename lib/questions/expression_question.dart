@@ -1,7 +1,4 @@
-import 'dart:async';
-
-import '../expression/ast.dart';
-import '../expression/parser.dart';
+import '../expression/evaluator.dart';
 import '../metadata.dart';
 import './question.dart';
 
@@ -9,14 +6,16 @@ class ExpressionQuestion extends Question {
   static final description = {
     'type': 'expression',
     'parent': 'question',
-    'properties': [
-      'expression',
-    ]
+    'properties': ['expression'],
   };
   ExpressionQuestion([dynamic json])
-      : super(json, ExpressionQuestion.description['type'].toString());
+    : super(json, ExpressionQuestion.description['type'].toString()) {
+    evaluator = ExpressionEvaluator((dynamic value) {
+      this.value = value;
+    });
+  }
 
-  Expression? ast;
+  late ExpressionEvaluator evaluator;
 
   @override
   registerObjectDescription() {
@@ -34,29 +33,12 @@ class ExpressionQuestion extends Question {
   }
 
   void eval() {
-    value = ast?.eval(contextProvider?.getVariables() ?? {});
+    value = evaluator.eval(contextProvider?.getVariables() ?? {});
   }
-
-  final List<StreamSubscription<dynamic>> _dependencies = [];
 
   @override
   void initialize() {
     super.initialize();
-    for (var dep in _dependencies) {
-      dep.cancel();
-    }
-    _dependencies.clear();
-    ast = parser.parse(expression ?? '').value;
-    if (contextProvider != null) {
-      ast!.getDependencies().forEach((questionName) {
-        var question = contextProvider!.getQuestionByName(questionName);
-        if (question != null) {
-          _dependencies.add(
-              question.getChangesStreamController('value').stream.listen((_) {
-            eval();
-          }));
-        }
-      });
-    }
+    evaluator.initialize(expression, contextProvider);
   }
 }
