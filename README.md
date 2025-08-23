@@ -17,7 +17,7 @@ Flutter SurveyJS Runner library.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+This project should parse SurveyJS JSON and run survey: collect answers and return survey answers data.
 
 ## Getting started
 
@@ -53,11 +53,11 @@ samples, guidance on mobile development, and a full API reference.
  - [ ] Matrix single select question
  - [ ] Dropdown question (+ tagbox)
  - [ ] Matrix dropdown question
- - [ ] Boolean question
- - [ ] Rating question
+ - [x] Boolean question
+ - [x] Rating question
  - [ ] Title actions
  - [ ] Conditional visibility for choices
- - [ ] HTML and image questions - decide whwther they are needed
+ - [x] HTML and image questions - decide whether they are needed
  
  ... and son on
 
