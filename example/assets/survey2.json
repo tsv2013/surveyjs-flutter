@@ -52,7 +52,8 @@
                 {
                     "type": "comment",
                     "name": "question6",
-                    "title": "Question comment title"
+                    "title": "Question comment title",
+                    "visibleIf": "{question7} = true"
                 },
                 {
                     "type": "boolean",
