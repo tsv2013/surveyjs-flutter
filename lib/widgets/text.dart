@@ -8,15 +8,13 @@ class TextWidget extends QuestionWidget<TextQuestion> {
 
   @override
   Widget buildControl(BuildContext context, AsyncSnapshot snapshot) {
+    final theme = Theme.of(context);
     controller.value = controller.value.copyWith(text: snapshot.data);
     return TextFormField(
       keyboardType: question.getKeyboardType(),
       controller: controller,
       onChanged: (value) => question.value = value,
-      decoration: const InputDecoration(
-        // labelText: question.title ?? '',
-        border: OutlineInputBorder(),
-      ),
+      style: theme.textTheme.bodyMedium,
     );
   }
 }

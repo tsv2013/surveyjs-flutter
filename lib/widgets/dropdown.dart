@@ -8,6 +8,7 @@ class DropdownWidget extends QuestionWidget<DropdownQuestion> {
 
   @override
   Widget buildControl(BuildContext context, AsyncSnapshot snapshot) {
+    final theme = Theme.of(context);
     final choices = question.choices;
     return DropdownButtonFormField(
       value: question.value,
@@ -16,14 +17,16 @@ class DropdownWidget extends QuestionWidget<DropdownQuestion> {
               .map(
                 (item) => DropdownMenuItem(
                   value: item.value,
-                  child: Text(item.text ?? item.value?.toString() ?? ''),
+                  child: Text(
+                    item.text ?? item.value?.toString() ?? '',
+                    style: theme.textTheme.bodyMedium,
+                  ),
                 ),
               )
               .toList(),
       onChanged: (value) {
         question.value = value;
       },
-      decoration: InputDecoration(labelText: question.title),
     );
   }
 }

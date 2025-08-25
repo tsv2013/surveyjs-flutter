@@ -9,12 +9,13 @@ class RadioGroupWidget extends QuestionWidget<SelectQuestion> {
 
   @override
   Widget buildControl(BuildContext context, AsyncSnapshot snapshot) {
+    final theme = Theme.of(context);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children:
           question.choices.map<Widget>((ItemValue itemValue) {
             return Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
-              // RadioListTile
               child: Row(
                 children: [
                   Radio(
@@ -23,8 +24,9 @@ class RadioGroupWidget extends QuestionWidget<SelectQuestion> {
                     onChanged: (String? value) {
                       question.value = value;
                     },
+                    activeColor: theme.colorScheme.primary,
                   ),
-                  Text(itemValue.text ?? ''),
+                  Text(itemValue.text ?? '', style: theme.textTheme.bodyMedium),
                 ],
               ),
             );

@@ -3,6 +3,7 @@ export 'panel.dart' show Panel;
 export 'survey_element.dart' show SurveyElement;
 export 'widget_factory.dart' show WidgetFactory;
 export 'element_factory.dart' show ElementFactory;
+export 'themes.dart' show surveyThemes, defaultTheme;
 
 export 'questions/item_value.dart' show ItemValue;
 export 'questions/expression_question.dart' show ExpressionQuestion;

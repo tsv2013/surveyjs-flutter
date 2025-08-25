@@ -12,6 +12,7 @@ import 'package:example/main.dart';
 import 'package:surveyjs_flutter/element_factory.dart';
 import 'package:surveyjs_flutter/questions/text_question.dart';
 import 'package:surveyjs_flutter/survey.dart';
+import 'package:surveyjs_flutter/themes.dart';
 import 'package:surveyjs_flutter/widget_factory.dart';
 import 'package:surveyjs_flutter/widgets/survey.dart';
 import 'package:surveyjs_flutter/widgets/text.dart';
@@ -29,7 +30,9 @@ void main() {
     };
     var survey = Survey(json);
     await tester.pumpWidget(
-      MaterialApp(home: Scaffold(body: SurveyWidget(survey))),
+      MaterialApp(
+        home: Scaffold(body: SurveyWidget(survey, currentTheme: defaultTheme)),
+      ),
     );
 
     // Verify that our counter starts at 0.

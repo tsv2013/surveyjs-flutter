@@ -7,6 +7,7 @@ class ImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return StreamBuilder(
       initialData: question.imageLink,
       stream: question.getChangesStreamController('imageLink').stream,
@@ -20,12 +21,22 @@ class ImageWidget extends StatelessWidget {
                     question.imageLink!,
                     semanticLabel: question.altText,
                     loadingBuilder:
-                        (context, error, stackTrace) =>
-                            Text('Image is loading...'),
+                        (context, error, stackTrace) => Text(
+                          'Image is loading...',
+                          style: theme.textTheme.bodyMedium,
+                        ),
                     errorBuilder:
-                        (context, error, stackTrace) => Text('Image not found'),
+                        (context, error, stackTrace) => Text(
+                          question.altText ?? 'Image not found',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: theme.colorScheme.error,
+                          ),
+                        ),
                   )
-                  : Text(question.altText ?? ''),
+                  : Text(
+                    question.altText ?? '',
+                    style: theme.textTheme.bodyMedium,
+                  ),
             ],
           ),
         );

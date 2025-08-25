@@ -8,16 +8,16 @@ class CheckboxWidget extends QuestionWidget<SelectQuestion> {
 
   @override
   Widget buildControl(BuildContext context, AsyncSnapshot snapshot) {
+    final theme = Theme.of(context);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children:
           question.choices.map<Widget>((ItemValue itemValue) {
             return Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
-              // CheckboxListTile
               child: Row(
                 children: [
                   Checkbox(
-                    tristate: true,
                     value: (snapshot.data ?? []).contains(
                       itemValue.value.toString(),
                     ),
@@ -31,8 +31,9 @@ class CheckboxWidget extends QuestionWidget<SelectQuestion> {
                       }
                       question.value = qValue;
                     },
+                    activeColor: theme.colorScheme.primary,
                   ),
-                  Text(itemValue.text ?? ''),
+                  Text(itemValue.text ?? '', style: theme.textTheme.bodyMedium),
                 ],
               ),
             );
