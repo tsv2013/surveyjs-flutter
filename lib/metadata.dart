@@ -3,12 +3,19 @@ class PropertyDescriptor {
   late final String type;
   late final bool isArray;
   late final bool isComplexType;
+  late final bool isLocalizable;
 
-  PropertyDescriptor(this.name,
-      {this.type = 'string', this.isArray = false, this.isComplexType = false});
+  PropertyDescriptor(
+    this.name, {
+    this.type = 'string',
+    this.isArray = false,
+    this.isComplexType = false,
+  });
   PropertyDescriptor.fromDescription(this.name, dynamic jsonDescription) {
     String declaredType =
-        jsonDescription != null ? jsonDescription['type'] : 'string';
+        jsonDescription != null
+            ? jsonDescription['type'] ?? 'string'
+            : 'string';
     if (declaredType.endsWith('[]')) {
       isArray = true;
       type = declaredType.substring(0, declaredType.length - 2);
@@ -17,13 +24,15 @@ class PropertyDescriptor {
       type = declaredType;
     }
     isComplexType = !['string', 'bool', 'number'].contains(type);
+    isLocalizable =
+        type == 'string' &&
+        (jsonDescription != null && (jsonDescription['localizable'] == true));
   }
   PropertyDescriptor.fromJson(dynamic jsonDescription)
-      : this.fromDescription(
-            jsonDescription is String
-                ? jsonDescription
-                : jsonDescription['name'],
-            jsonDescription is String ? null : jsonDescription);
+    : this.fromDescription(
+        jsonDescription is String ? jsonDescription : jsonDescription['name'],
+        jsonDescription is String ? null : jsonDescription,
+      );
 }
 
 class ObjectDescriptor {
@@ -34,13 +43,14 @@ class ObjectDescriptor {
   ObjectDescriptor(this.type, dynamic jsonDescription) {
     parent = jsonDescription['parent'];
     for (var jsonPropertyDescription in jsonDescription['properties']) {
-      var propertyDescriptor =
-          PropertyDescriptor.fromJson(jsonPropertyDescription);
+      var propertyDescriptor = PropertyDescriptor.fromJson(
+        jsonPropertyDescription,
+      );
       _properties[Symbol(propertyDescriptor.name)] = propertyDescriptor;
     }
   }
   ObjectDescriptor.fromJson(dynamic jsonDescription)
-      : this(jsonDescription['type'], jsonDescription);
+    : this(jsonDescription['type'], jsonDescription);
   Map<Symbol, PropertyDescriptor> get properties => _properties;
 }
 
@@ -68,26 +78,35 @@ class Metadata {
     }
     List<PropertyDescriptor> propertyDescriptors =
         List<PropertyDescriptor>.from(
-            objectDescription.properties.values.toList());
+          objectDescription.properties.values.toList(),
+        );
     while (objectDescription != null && objectDescription.parent != null) {
-      List<PropertyDescriptor>? parentProperties = Metadata
-          ._descriptors[Symbol(objectDescription.parent!)]?.properties.values
-          .toList();
+      List<PropertyDescriptor>? parentProperties =
+          Metadata
+              ._descriptors[Symbol(objectDescription.parent!)]
+              ?.properties
+              .values
+              .toList();
       parentProperties?.forEach((propertyDescriptor) {
-        if (!propertyDescriptors
-            .any((pd) => pd.name == propertyDescriptor.name)) {
+        if (!propertyDescriptors.any(
+          (pd) => pd.name == propertyDescriptor.name,
+        )) {
           propertyDescriptors.add(propertyDescriptor);
         }
       });
-      objectDescription =
-          Metadata.findObjectDescriptor(objectDescription.parent!);
+      objectDescription = Metadata.findObjectDescriptor(
+        objectDescription.parent!,
+      );
     }
     return propertyDescriptors;
   }
 
   static PropertyDescriptor? findPropertyDescriptor(
-      String type, String propertyName) {
-    return Metadata
-        ._descriptors[Symbol(type)]?.properties[Symbol(propertyName)];
+    String type,
+    String propertyName,
+  ) {
+    return Metadata._descriptors[Symbol(type)]?.properties[Symbol(
+      propertyName,
+    )];
   }
 }

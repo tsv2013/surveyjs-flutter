@@ -6,12 +6,12 @@ class ItemValue extends SurveyElement {
     'type': 'itemvalue',
     'parent': 'element',
     'properties': [
-      'text',
+      {'name': 'text', 'localizable': true},
       'value',
-    ]
+    ],
   };
   ItemValue([dynamic json])
-      : super(json, ItemValue.description['type'].toString());
+    : super(json, ItemValue.description['type'].toString());
 
   @override
   registerObjectDescription() {

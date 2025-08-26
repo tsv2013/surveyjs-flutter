@@ -11,6 +11,7 @@ class Survey extends Panel implements IExpressionContextProvider {
     "properties": [
       {"name": 'showTOC', "type": 'bool'},
       {"name": 'pages', "type": 'panel[]'},
+      "locale",
     ],
   };
   Survey([dynamic json]) : super(json, Survey.description['type'].toString()) {
@@ -31,6 +32,7 @@ class Survey extends Panel implements IExpressionContextProvider {
   @override
   void initialize() {
     visitAllElements((SurveyElement el) {
+      el.locale = locale;
       el.contextProvider = this;
     });
     visitAllElements((SurveyElement el) {

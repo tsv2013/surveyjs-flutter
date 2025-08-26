@@ -24,26 +24,41 @@ void main() {
       );
       expect(propDescriptor != null, true);
       expect(propDescriptor!.type, 'number');
+      expect(propDescriptor!.isLocalizable, false);
     });
-  });
-  test('Collect parent properties', () {
-    var jsonChildDescription = {
-      "type": "child",
-      "parent": "parent",
-      "properties": ['strProperty'],
-    };
-    var jsonParentDescription = {
-      "type": "parent",
-      "properties": [
-        {"name": 'numProperty', "type": 'number'},
-        {"name": 'boolProperty', "type": 'bool'},
-      ],
-    };
-    Metadata.registerObjectDescription(jsonChildDescription);
-    Metadata.registerObjectDescription(jsonParentDescription);
-    expect(
-      Metadata.findPropertyDescriptors('child').map((pd) => pd.name).toList(),
-      ['strProperty', 'numProperty', 'boolProperty'],
-    );
+    test('Collect parent properties', () {
+      var jsonChildDescription = {
+        "type": "child",
+        "parent": "parent",
+        "properties": ['strProperty'],
+      };
+      var jsonParentDescription = {
+        "type": "parent",
+        "properties": [
+          {"name": 'numProperty', "type": 'number'},
+          {"name": 'boolProperty', "type": 'bool'},
+        ],
+      };
+      Metadata.registerObjectDescription(jsonChildDescription);
+      Metadata.registerObjectDescription(jsonParentDescription);
+      expect(
+        Metadata.findPropertyDescriptors('child').map((pd) => pd.name).toList(),
+        ['strProperty', 'numProperty', 'boolProperty'],
+      );
+    });
+    test('Define localizable property', () {
+      var jsonDescription = {
+        "type": "text",
+        "properties": [
+          {"name": 'title', "localizable": true},
+        ],
+      };
+      var objDescriptor = ObjectDescriptor.fromJson(jsonDescription);
+      Metadata.registerObject(objDescriptor);
+      var propDescriptor = Metadata.findPropertyDescriptor('text', 'title');
+      expect(propDescriptor != null, true);
+      expect(propDescriptor!.type, 'string');
+      expect(propDescriptor!.isLocalizable, true);
+    });
   });
 }

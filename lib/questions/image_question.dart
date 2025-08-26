@@ -6,8 +6,8 @@ class ImageQuestion extends Question {
     'type': 'image',
     'parent': 'question',
     'properties': [
-      {'name': 'imageLink', 'type': 'string'},
-      {'name': 'altText', 'type': 'string'},
+      {'name': 'imageLink', 'localizable': true},
+      {'name': 'altText', 'localizable': true},
     ],
   };
   ImageQuestion([dynamic json])

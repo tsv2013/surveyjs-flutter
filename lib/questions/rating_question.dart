@@ -8,8 +8,8 @@ class RatingQuestion extends Question {
     'properties': [
       {'name': 'rateMin', 'type': 'number'},
       {'name': 'rateMax', 'type': 'number'},
-      {'name': 'minRateDescription', 'type': 'string'},
-      {'name': 'maxRateDescription', 'type': 'string'},
+      {'name': 'minRateDescription', 'localizable': true},
+      {'name': 'maxRateDescription', 'localizable': true},
     ],
   };
   RatingQuestion([dynamic json])
