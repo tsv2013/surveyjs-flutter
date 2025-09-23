@@ -59,7 +59,7 @@ samples, guidance on mobile development, and a full API reference.
  - [ ] Conditional visibility for choices
  - [x] HTML and image questions - decide whether they are needed
  
- ... and son on
+ ... and so on
 
 ## Usage
 

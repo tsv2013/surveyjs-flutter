@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:surveyjs_flutter/surveyjs_flutter.dart';
 
-Future<Map> loadSurveyJson(String fileName) async {
-  return jsonDecode(await rootBundle.loadString('assets/$fileName'));
+Future<Survey> loadSurvey(String fileName) async {
+  var json = jsonDecode(await rootBundle.loadString('assets/$fileName'));
+  return Survey(json);
 }
 
 void main() {
@@ -65,11 +66,11 @@ class _MyAppState extends State<MyApp> {
       title: "Flutter SurveyJS Demo",
       theme: surveyThemes[_currentTheme],
       home: Center(
-        child: FutureBuilder<Map>(
-          builder: (BuildContext context, AsyncSnapshot<Map> snapshot) {
+        child: FutureBuilder<Survey>(
+          builder: (BuildContext context, AsyncSnapshot<Survey> snapshot) {
             if (snapshot.hasData) {
               return SurveyWidget(
-                Survey(snapshot.data),
+                snapshot.data!,
                 onThemeChanged: _updateTheme,
                 currentTheme: _currentTheme,
               );
@@ -99,7 +100,7 @@ class _MyAppState extends State<MyApp> {
               );
             }
           },
-          future: loadSurveyJson('survey2.json'),
+          future: loadSurvey('survey2.json'),
         ),
       ),
     );
