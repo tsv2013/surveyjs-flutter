@@ -55,6 +55,35 @@ void main() {
       expect(elements[0].type, 'element');
       expect(elements[0].title, 'Title');
     });
+    test('Desrialize localizable property', () {
+      Metadata.registerObjectDescription({
+        "type": "text_loc",
+        "properties": [
+          {"name": 'title', "localizable": true},
+        ],
+      });
+
+      var obj = ModelBase.fromJson({
+        'type': 'text_loc',
+        'title': {'default': 'Title', 'de': 'Titel'},
+      });
+      expect(obj.locale, 'default');
+      expect(obj['title'], 'Title');
+      obj.locale = 'de';
+      expect(obj['title'], 'Titel');
+
+      obj = ModelBase.fromJson({'type': 'text_loc', 'title': 'Title'});
+      expect(obj.locale, 'default');
+      expect(obj['title'], 'Title');
+      obj.locale = 'de';
+      expect(obj['title'], 'Title');
+      obj['title'] = 'Neuer Titel';
+      expect(obj['title'], 'Neuer Titel');
+      obj.locale = 'default';
+      expect(obj['title'], 'Title');
+      obj.locale = 'de';
+      expect(obj['title'], 'Neuer Titel');
+    });
   });
   group('ModelBloc', () {
     test(

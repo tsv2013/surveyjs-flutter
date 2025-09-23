@@ -6,8 +6,8 @@ class BooleanQuestion extends Question {
     'type': 'boolean',
     'parent': 'question',
     'properties': [
-      {'name': 'labelTrue', 'type': 'string'},
-      {'name': 'labelFalse', 'type': 'string'},
+      {'name': 'labelTrue', 'localizable': true},
+      {'name': 'labelFalse', 'localizable': true},
     ],
   };
   BooleanQuestion([dynamic json])

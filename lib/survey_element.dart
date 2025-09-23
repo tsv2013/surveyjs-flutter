@@ -7,15 +7,14 @@ class SurveyElement extends ModelBloc {
     'type': 'element',
     'properties': [
       'renderAs',
-      'title',
-    ]
+      {'name': 'title', 'localizable': true},
+    ],
   };
   SurveyElement([dynamic json, String? type])
-      : super.fromJson(
-            json,
-            type ??
-                json?['type'] ??
-                SurveyElement.description['type'].toString());
+    : super.fromJson(
+        json,
+        type ?? json?['type'] ?? SurveyElement.description['type'].toString(),
+      );
 
   @override
   registerObjectDescription() {

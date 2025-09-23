@@ -4,6 +4,7 @@ import 'metadata.dart';
 class ModelBase {
   late final String type;
 
+  final _localizedProperties = [];
   final _properties = <Symbol, String>{};
   final _values = <Symbol, dynamic>{};
 
@@ -16,12 +17,23 @@ class ModelBase {
 
     for (var propertyDescriptor in dynamicProperties) {
       dynamic value = json?[propertyDescriptor.name];
+      if (propertyDescriptor.isLocalizable) {
+        _localizedProperties.add(propertyDescriptor.name);
+        if (value is String) {
+          value = {'default': value};
+        }
+      }
       if (propertyDescriptor.isArray) {
         if (propertyDescriptor.isComplexType) {
-          value = (json?[propertyDescriptor.name] ?? [])
-              .map((obj) => ElementFactory.create(
-                  obj['type'] ?? propertyDescriptor.type, [obj]))
-              .toList();
+          value =
+              (json?[propertyDescriptor.name] ?? [])
+                  .map(
+                    (obj) => ElementFactory.create(
+                      obj['type'] ?? propertyDescriptor.type,
+                      [obj],
+                    ),
+                  )
+                  .toList();
         }
         value ??= [];
       }
@@ -40,16 +52,37 @@ class ModelBase {
 
   dynamic get(String key, [bool checkPropertyDefined = true]) {
     if (checkPropertyDefined) {
-      assert(_values.containsKey(Symbol(key)),
-          "Property should belong the object");
+      assert(
+        _values.containsKey(Symbol(key)),
+        "Property should belong the object",
+      );
+    }
+    if (_localizedProperties.contains(key)) {
+      dynamic locValue = _values[Symbol(key)];
+      if (locValue is Map<String, dynamic>) {
+        return locValue[locale] ?? locValue['default'];
+      }
     }
     return _values[Symbol(key)];
   }
 
   set(String key, dynamic value) {
     assert(
-        _values.containsKey(Symbol(key)), "Property should belong the object");
-    _values[Symbol(key)] = value;
+      _values.containsKey(Symbol(key)),
+      "Property should belong the object",
+    );
+    if (_localizedProperties.contains(key)) {
+      dynamic locValue = _values[Symbol(key)];
+      if (locValue is Map<String, dynamic>) {
+        locValue[locale] = value;
+      } else {
+        _values[Symbol(key)] = {
+          [locale]: value,
+        };
+      }
+    } else {
+      _values[Symbol(key)] = value;
+    }
   }
 
   dynamic operator [](String key) => get(key);
@@ -68,7 +101,10 @@ class ModelBase {
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{};
     _properties.forEach(
-        (symbol, propertyName) => json[propertyName] = _values[symbol]);
+      (symbol, propertyName) => json[propertyName] = _values[symbol],
+    );
     return json;
   }
+
+  String locale = 'default';
 }
