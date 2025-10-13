@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:surveyjs_flutter/surveyjs_flutter.dart';
@@ -65,6 +66,14 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: "Flutter SurveyJS Demo",
       theme: surveyThemes[_currentTheme],
+      localizationsDelegates: [
+        SurveyLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [Locale('en'), Locale('de')],
+      locale: Locale('de'),
       home: Center(
         child: FutureBuilder<Survey>(
           builder: (BuildContext context, AsyncSnapshot<Survey> snapshot) {

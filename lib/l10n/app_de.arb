@@ -1,0 +1,13 @@
+{
+  "surveyTitle": "Umfrage",
+  "previousButton": "Zurück",
+  "nextButton": "Weiter",
+  "completeButton": "Abschließen",
+  "typeNotVisualized": "Typ '{type}' wird noch nicht visualisiert.",
+  "questionTitle": "{title}",
+  "minRateDescription": "{description}",
+  "maxRateDescription": "{description}",
+  "labelTrue": "Wahr",
+  "labelFalse": "Falsch",
+  "@@locale": "de"
+}

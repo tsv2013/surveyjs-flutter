@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/lib_localizations.dart';
 import './panel.dart';
 import '../survey.dart';
 import '../themes.dart';
@@ -29,6 +30,26 @@ class SurveyWidget extends StatelessWidget {
                     backgroundColor: theme.colorScheme.inversePrimary,
                     title: Text(survey.title!),
                     actions: [
+                      PopupMenuButton<Locale>(
+                        onSelected: (Locale newLocale) {
+                          // Call the method from your provider to change the language
+                          // context.read<LocaleNotifier>().changeLocale(
+                          //   newLocale,
+                          // );
+                        },
+                        itemBuilder:
+                            (BuildContext context) => <PopupMenuEntry<Locale>>[
+                              PopupMenuItem<Locale>(
+                                value: Locale('en'),
+                                child: Text('English'),
+                              ),
+                              PopupMenuItem<Locale>(
+                                value: Locale('de'),
+                                child: Text('Deutch'),
+                              ),
+                              // Add more languages as needed
+                            ],
+                      ),
                       DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                           value: currentTheme,
@@ -107,14 +128,14 @@ class SurveyWidget extends StatelessWidget {
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(32.0),
-            child: Row(children: getNavigationActions()),
+            child: Row(children: getNavigationActions(context)),
           ),
         );
       },
     );
   }
 
-  getNavigationActions() {
+  getNavigationActions(BuildContext context) {
     List<Widget> actions = [];
     if (!survey.isFirstPage) {
       actions.add(
@@ -123,7 +144,7 @@ class SurveyWidget extends StatelessWidget {
             survey.goPreviousPage();
           },
           icon: const Icon(Icons.skip_previous),
-          label: const Text('Prevoius'),
+          label: Text(SurveyLocalizations.of(context)!.previousButton),
           iconAlignment: IconAlignment.start,
         ),
       );
@@ -136,7 +157,7 @@ class SurveyWidget extends StatelessWidget {
               survey.complete();
             },
             icon: const Icon(Icons.check_circle),
-            label: const Text('Complete'),
+            label: Text(SurveyLocalizations.of(context)!.completeButton),
             iconAlignment: IconAlignment.start,
           )
           : TextButton.icon(
@@ -144,7 +165,7 @@ class SurveyWidget extends StatelessWidget {
               survey.goNextPage();
             },
             icon: const Icon(Icons.skip_next),
-            label: const Text('Next'),
+            label: Text(SurveyLocalizations.of(context)!.nextButton),
             iconAlignment: IconAlignment.end,
           ),
     );

@@ -1,0 +1,6 @@
+arb-dir: lib/l10n
+template-arb-file: app_en.arb
+output-localization-file: lib_localizations.dart
+output-class: SurveyLocalizations
+synthetic-package: false
+output-dir: lib/l10n

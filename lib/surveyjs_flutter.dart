@@ -32,3 +32,5 @@ export 'widgets/rating.dart' show RatingWidget;
 export 'widgets/question.dart' show QuestionWidget;
 export 'widgets/survey.dart' show SurveyWidget;
 export 'widgets/text.dart' show TextWidget;
+
+export 'l10n/lib_localizations.dart' show SurveyLocalizations;
