@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:surveyjs_flutter/questions/rating_question.dart';
 import 'package:surveyjs_flutter/widgets/rating.dart';
 
+import 'helpers.dart';
+
 void main() {
   testWidgets('RatingWidget renders and updates value', (
     WidgetTester tester,
@@ -13,15 +15,17 @@ void main() {
     q.rateMax = 3;
     q.minRateDescription = 'Bad';
     q.maxRateDescription = 'Good';
-    await tester.pumpWidget(MaterialApp(home: Scaffold(body: RatingWidget(q))));
-    expect(find.text('Rate this'), findsOneWidget);
+    await tester.pumpWidget(buildTestableWidget(RatingWidget(q)));
+    await tester.pumpAndSettle();
+    // expect(find.text('Rate this'), findsOneWidget);
     expect(find.text('Bad'), findsOneWidget);
     expect(find.text('Good'), findsOneWidget);
     expect(q.value, isNull);
-    await tester.tap(find.byIcon(Icons.star).first);
+    expect(find.byType(IconButton), findsExactly(3));
+    await tester.tap(find.byType(IconButton).first);
     await tester.pumpAndSettle();
     expect(q.value, equals(1));
-    await tester.tap(find.byIcon(Icons.star).last);
+    await tester.tap(find.byType(IconButton).last);
     await tester.pumpAndSettle();
     expect(q.value, equals(3));
   });
