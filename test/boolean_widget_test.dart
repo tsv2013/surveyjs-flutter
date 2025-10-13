@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:surveyjs_flutter/questions/boolean_question.dart';
 import 'package:surveyjs_flutter/widgets/boolean.dart';
 
+import 'helpers.dart';
+
 void main() {
   testWidgets('BooleanWidget renders and updates value', (
     WidgetTester tester,
@@ -11,9 +13,8 @@ void main() {
     q.title = 'Is Active?';
     q.labelTrue = 'Yes';
     q.labelFalse = 'No';
-    await tester.pumpWidget(
-      MaterialApp(home: Scaffold(body: BooleanWidget(q))),
-    );
+    await tester.pumpWidget(buildTestableWidget(BooleanWidget(q)));
+    await tester.pumpAndSettle();
     expect(find.text('Yes'), findsOneWidget);
     expect(find.text('No'), findsOneWidget);
     expect(q.value, isNot(true));

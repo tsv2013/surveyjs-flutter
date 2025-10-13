@@ -10,6 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:example/main.dart';
 import 'package:surveyjs_flutter/element_factory.dart';
+import 'package:surveyjs_flutter/l10n/lib_localizations.dart';
 import 'package:surveyjs_flutter/questions/text_question.dart';
 import 'package:surveyjs_flutter/survey.dart';
 import 'package:surveyjs_flutter/themes.dart';
@@ -31,6 +32,8 @@ void main() {
     var survey = Survey(json);
     await tester.pumpWidget(
       MaterialApp(
+        localizationsDelegates: [SurveyLocalizations.delegate],
+        locale: Locale("en"),
         home: Scaffold(body: SurveyWidget(survey, currentTheme: defaultTheme)),
       ),
     );

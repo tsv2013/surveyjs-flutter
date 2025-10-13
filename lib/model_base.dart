@@ -76,9 +76,7 @@ class ModelBase {
       if (locValue is Map<String, dynamic>) {
         locValue[locale] = value;
       } else {
-        _values[Symbol(key)] = {
-          [locale]: value,
-        };
+        _values[Symbol(key)] = {locale: value};
       }
     } else {
       _values[Symbol(key)] = value;
