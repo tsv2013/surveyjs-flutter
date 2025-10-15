@@ -4,7 +4,7 @@ import '../questions/select_question.dart';
 import 'question.dart';
 
 class CheckboxWidget extends QuestionWidget<SelectQuestion> {
-  const CheckboxWidget(SelectQuestion question, {super.key}) : super(question);
+  const CheckboxWidget(super.question, {super.key});
 
   @override
   Widget buildControl(BuildContext context, AsyncSnapshot snapshot) {

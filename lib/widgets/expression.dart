@@ -3,8 +3,7 @@ import '../questions/expression_question.dart';
 import 'question.dart';
 
 class ExpressionWidget extends QuestionWidget<ExpressionQuestion> {
-  const ExpressionWidget(ExpressionQuestion question, {super.key})
-    : super(question);
+  const ExpressionWidget(super.question, {super.key});
 
   @override
   Widget buildControl(BuildContext context, AsyncSnapshot snapshot) {

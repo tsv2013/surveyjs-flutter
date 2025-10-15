@@ -3,8 +3,7 @@ import '../questions/dropdown_question.dart';
 import 'question.dart';
 
 class DropdownWidget extends QuestionWidget<DropdownQuestion> {
-  const DropdownWidget(DropdownQuestion question, {super.key})
-    : super(question);
+  const DropdownWidget(super.question, {super.key});
 
   @override
   Widget buildControl(BuildContext context, AsyncSnapshot snapshot) {

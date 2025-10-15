@@ -4,8 +4,7 @@ import '../questions/select_question.dart';
 import 'question.dart';
 
 class RadioGroupWidget extends QuestionWidget<SelectQuestion> {
-  const RadioGroupWidget(SelectQuestion question, {super.key})
-    : super(question);
+  const RadioGroupWidget(super.question, {super.key});
 
   @override
   Widget buildControl(BuildContext context, AsyncSnapshot snapshot) {

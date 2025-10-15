@@ -3,7 +3,7 @@ import '../questions/boolean_question.dart';
 import 'question.dart';
 
 class BooleanWidget extends QuestionWidget<BooleanQuestion> {
-  const BooleanWidget(BooleanQuestion question, {super.key}) : super(question);
+  const BooleanWidget(super.question, {super.key});
 
   @override
   Widget buildControl(BuildContext context, AsyncSnapshot snapshot) {

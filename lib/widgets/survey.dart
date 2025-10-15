@@ -22,7 +22,7 @@ class SurveyWidget extends StatelessWidget {
       stream: survey.getChangesStreamController('currentPage').stream,
       initialData: survey.currentPage,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        final theme = Theme.of(context) as ThemeData;
+        final theme = Theme.of(context);
         return Scaffold(
           appBar:
               survey.title != null

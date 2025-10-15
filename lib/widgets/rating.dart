@@ -3,7 +3,7 @@ import '../questions/rating_question.dart';
 import 'question.dart';
 
 class RatingWidget extends QuestionWidget<RatingQuestion> {
-  const RatingWidget(RatingQuestion question, {super.key}) : super(question);
+  const RatingWidget(super.question, {super.key});
 
   @override
   Widget buildControl(BuildContext context, AsyncSnapshot snapshot) {

@@ -24,7 +24,7 @@ void main() {
       );
       expect(propDescriptor != null, true);
       expect(propDescriptor!.type, 'number');
-      expect(propDescriptor!.isLocalizable, false);
+      expect(propDescriptor.isLocalizable, false);
     });
     test('Collect parent properties', () {
       var jsonChildDescription = {
@@ -58,7 +58,7 @@ void main() {
       var propDescriptor = Metadata.findPropertyDescriptor('text', 'title');
       expect(propDescriptor != null, true);
       expect(propDescriptor!.type, 'string');
-      expect(propDescriptor!.isLocalizable, true);
+      expect(propDescriptor.isLocalizable, true);
     });
   });
 }

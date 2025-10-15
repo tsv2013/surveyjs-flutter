@@ -3,7 +3,7 @@ import '../questions/comment_question.dart';
 import 'question.dart';
 
 class CommentWidget extends QuestionWidget<CommentQuestion> {
-  const CommentWidget(CommentQuestion question, {super.key}) : super(question);
+  const CommentWidget(super.question, {super.key});
 
   @override
   Widget buildControl(BuildContext context, AsyncSnapshot snapshot) {

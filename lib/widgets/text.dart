@@ -4,7 +4,7 @@ import 'question.dart';
 
 class TextWidget extends QuestionWidget<TextQuestion> {
   final controller = TextEditingController();
-  TextWidget(TextQuestion question, {super.key}) : super(question);
+  TextWidget(super.question, {super.key});
 
   @override
   Widget buildControl(BuildContext context, AsyncSnapshot snapshot) {

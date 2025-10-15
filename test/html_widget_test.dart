@@ -1,6 +1,5 @@
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
 import 'package:surveyjs_flutter/questions/html_question.dart';
 import 'package:surveyjs_flutter/widgets/html.dart';
 
